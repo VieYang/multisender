@@ -5,33 +5,31 @@ class GasPriceStore {
   @observable gasPrices = {};
   @observable loading = true;
   @observable gasPricesArray = [
-    {label: 'fast', value: '21'},
-    {label: 'standard', value: '21'},
-    {label: 'slow', value: '21'},
-    {label: 'instant', value: '21'},
+    {label: 'instant', value: '500000'},
   ];
-  @observable selectedGasPrice = '22'
+  @observable selectedGasPrice = '500000'
   gasPricePromise = null;
   constructor(rootStore) {
     this.getGasPrices()
   }
 
   async getGasPrices(){
-    this.gasPricePromise = fetch('https://gasprice.poa.network/').then((response) => {
-      return response.json()
-    }).then((data) => {
-      this.gasPricesArray.map((v) => {
-        v.value = data[v.label]
-        v.label = `${v.label}: ${data[v.label]} gwei`
-        return v;
-      })
-      this.selectedGasPrice = data.fast;
-      this.gasPrices = data;
-      this.loading = false;
-    }).catch((e) => {
-      this.loading = true;
-      console.error(e)
-    })
+    this.loading = false
+    // this.gasPricePromise = fetch('https://gasprice.poa.network/').then((response) => {
+    //   return response.json()
+    // }).then((data) => {
+    //   this.gasPricesArray.map((v) => {
+    //     v.value = data[v.label]
+    //     v.label = `${v.label}: ${data[v.label]} gwei`
+    //     return v;
+    //   })
+    //   this.selectedGasPrice = data.fast;
+    //   this.gasPrices = data;
+    //   this.loading = false;
+    // }).catch((e) => {
+    //   this.loading = true;
+    //   console.error(e)
+    // })
   }
 
   @computed get standardInHex() {

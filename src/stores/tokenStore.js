@@ -25,7 +25,7 @@ class TokenStore {
   @observable errors = []
   @observable dublicates = []
   proxyMultiSenderAddress = process.env.REACT_APP_PROXY_MULTISENDER
-  
+
   constructor(rootStore) {
     this.web3Store = rootStore.web3Store;
     this.gasPriceStore = rootStore.gasPriceStore;
@@ -34,7 +34,7 @@ class TokenStore {
 
   @action
   async getDecimals(address) {
-    try{ 
+    try{
       const web3 = this.web3Store.web3;
       const token = new web3.eth.Contract(ERC20ABI, address);
       this.decimals = await token.methods.decimals().call();
@@ -63,7 +63,8 @@ class TokenStore {
       const web3 = this.web3Store.web3;
       let ethBalance =  await web3.eth.getBalance(this.web3Store.defaultAccount)
       ethBalance = Web3Utils.fromWei(ethBalance)
-      this.ethBalance = new BN(ethBalance).toFormat(3)
+      // this.ethBalance = new BN(ethBalance).toFormat(3)
+      this.ethBalance = ethBalance
       return this.ethBalance
     }
     catch(e){
@@ -107,7 +108,7 @@ class TokenStore {
         const currentFee = await multisender.methods.currentFee(this.web3Store.defaultAccount).call();
         this.currentFee = Web3Utils.fromWei(currentFee)
         return this.currentFee
-      }) 
+      })
     }
     catch(e){
       console.error('getCurrentFee',e)
@@ -121,7 +122,7 @@ class TokenStore {
         const multisender = new web3.eth.Contract(StormMultiSenderABI, this.proxyMultiSenderAddress);
         this.arrayLimit = await multisender.methods.arrayLimit().call();
         return this.arrayLimit
-      }) 
+      })
     }
     catch(e){
       console.error('GetArrayLimit', e)
@@ -204,7 +205,7 @@ class TokenStore {
             balance = this.multiplier.times(balance);
             const indexAddr = this.addresses_to_send.indexOf(address);
             if(indexAddr === -1){
-              this.addresses_to_send.push(address);  
+              this.addresses_to_send.push(address);
               this.balances_to_send.push(balance.toString(10))
             } else {
               if(this.dublicates.indexOf(address) === -1){
@@ -214,7 +215,7 @@ class TokenStore {
             }
           }
         })
-        
+
         this.jsonAddresses = this.addresses_to_send.map((addr, index) => {
           let obj = {}
           obj[addr] = (new BN(this.balances_to_send[index]).div(this.multiplier)).toString(10)
@@ -248,7 +249,7 @@ class TokenStore {
     const tx = new BN(standardGasPrice).times(new BN('5000000'))
     const txFeeMiners = tx.times(new BN(this.totalNumberTx))
     const contractFee = new BN(currentFeeInWei).times(this.totalNumberTx);
-    
+
     return Web3Utils.fromWei(txFeeMiners.plus(contractFee).toString(10))
   }
 

@@ -101,7 +101,7 @@ export class ThirdStep extends React.Component {
                 </div>
                 <div className="send-info-i">
                   <p>Your ETH Balance</p>
-                  <p className="send-info-amount">{this.tokenStore.ethBalance}</p>
+                  <p className="send-info-amount">{new BN(this.tokenStore.ethBalance).toFormat(3)}</p>
                 </div>
               </div>
               <div className="send-info-side">
@@ -120,7 +120,7 @@ export class ThirdStep extends React.Component {
                 <div className="send-info-i">
                   <p>Approximate Cost of Operation</p>
                   <p className="send-info-amount">
-                  {this.tokenStore.totalCostInEth} ETH        
+                  {this.tokenStore.totalCostInEth} ETH
                   </p>
                 </div>
                 <div className="send-info-i">
@@ -131,7 +131,7 @@ export class ThirdStep extends React.Component {
                 </div>
               </div>
             </div>
-            
+
             <Link onClick={this.onNext} className="button button_next" to='/4'>Next</Link>
           </form>
         </div>

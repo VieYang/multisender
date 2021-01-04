@@ -1,0 +1,20 @@
+diff --git a/node_modules/web3-core-method/README.md b/node_modules/web3-core-method/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/web3-core-method/package-lock.json b/node_modules/web3-core-method/package-lock.json
+old mode 100644
+new mode 100755
+diff --git a/node_modules/web3-core-method/src/index.js b/node_modules/web3-core-method/src/index.js
+old mode 100644
+new mode 100755
+index 7dc285c..787fa42
+--- a/node_modules/web3-core-method/src/index.js
++++ b/node_modules/web3-core-method/src/index.js
+@@ -398,6 +398,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
+   // first check if we already have a confirmed transaction
+   _ethereumCall.getTransactionReceipt(result)
+   .then(function(receipt) {
++      promiseResolved = true      
+       if (receipt && receipt.blockHash) {
+           if (defer.eventEmitter.listeners('confirmation').length > 0) {
+               // if the promise has not been resolved we must keep on watching for new Blocks, if a confrimation listener is present
