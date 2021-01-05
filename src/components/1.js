@@ -93,7 +93,7 @@ export class FirstStep extends React.Component {
 0x00fC79F38bAf0dE21E1fee5AC4648Bc885c1d774,14546
   `})
     swal("Information", `Please provide CSV file in comma separated address,balance format one line per address.
-    \nExample:\n 
+    \nExample:\n
 0xCBA5018De6b2b6F89d84A1F5A68953f07554765e,12
 0xa6Bf70bd230867c870eF13631D7EFf1AE8Ab85c9,113.45
 0x00b5F428905DEA1a67940093fFeaCeee58cA91Ae,1.049
@@ -104,7 +104,7 @@ export class FirstStep extends React.Component {
       swal({
         content: generateElement(`<div style="color:black;">
         Please provide JSON-array file in the following format.
-        \nExample:\n 
+        \nExample:\n
         <div style="font-size: 12px;color:purple;">
         [<br/>
           {"0xCBA5018De6b2b6F89d84A1F5A68953f07554765e":"12"},
@@ -117,7 +117,7 @@ export class FirstStep extends React.Component {
         `),
         icon: 'info'
       })
-      
+
     }
   }
   onDecimalsChange(e) {
@@ -154,7 +154,7 @@ export class FirstStep extends React.Component {
               enumerable: true,
             });
             addresses.push(el)
-          } 
+          }
         })
         .on('end', () => {
           try {
@@ -178,8 +178,8 @@ export class FirstStep extends React.Component {
     this.list = e.target.value;
     if(this.state.format === 'json') {
       this.onJsonChange(e.target.value)
-    }
-    if(this.state.format === 'csv'){
+    } else {
+    // if(this.state.format === 'csv'){
       this.onCsvChange(e.target.value)
     }
     return
@@ -191,7 +191,7 @@ export class FirstStep extends React.Component {
         swal("Error!", "Please select format CSV or JSON", 'error')
         return
       }
-      
+
       if(!this.parseCompleted){
         if(this.state.format === 'json') {
           this.onJsonChange(this.list)
@@ -237,18 +237,18 @@ export class FirstStep extends React.Component {
     }
     return (
       <div className="container container_bg">
-          
+
         <div className="content">
           <div className='sweet-loading'>
           <PulseLoader
-            color={'#123abc'} 
-            loading={this.web3Store.loading} 
+            color={'#123abc'}
+            loading={this.web3Store.loading}
             />
           </div>
           <h1 className="title"><strong>Welcome to Token</strong> MultiSender</h1>
           <p className="description">
             Please provide Token Address, JSON/CSV file with addresses <br />
-            This Dapp supports Mainnet, POA-Core, POA-sokol, Ropsten, Rinkeby, Kovan <br/>
+            This Dapp supports NewChain Mainnet and NewChain Testnet <br/>
             Please wait while all your token balances are loaded
           </p>
           <Form className="form">
@@ -256,7 +256,7 @@ export class FirstStep extends React.Component {
               <div className="form-inline-i form-inline-i_token-address">
                 <label htmlFor="token-address" className="label">Token Address</label>
                 <Select.Creatable
-              
+
               isLoading={this.web3Store.loading}
               name="form-field-name"
               id="token-address"
@@ -266,7 +266,7 @@ export class FirstStep extends React.Component {
               placeholder="Please select a token or input the address"
               options={this.web3Store.userTokens.slice()}
             />
-                
+
               </div>
               <div className="form-inline-i form-inline-i_token-decimals">
                 <label htmlFor="token-decimals" className="label">Decimals</label>
@@ -278,11 +278,11 @@ export class FirstStep extends React.Component {
               <Radio value="json" />JSON
               <Radio value="csv" />CSV
             </RadioGroup>
-            
+
             </label>
-            <Textarea 
+            <Textarea
               disabled={this.web3Store.loading}
-              data-gram 
+              data-gram
               validations={[required]}
               placeholder={`Example: ${this.state.placeholder}`}
               onBlur={this.onParse} id="addresses-with-balances" className="textarea"></Textarea>

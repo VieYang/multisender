@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from "mobx-react";
-
+import { Link } from 'react-router-dom';
 
 const Transaction = (tx) => {
   const {name, hash, status} = tx.tx;
@@ -50,7 +50,7 @@ export class FourthStep extends React.Component {
   }
   render () {
     let totalNumberOftx;
-    
+
     if(Number(this.tokenStore.totalBalance) > Number(this.tokenStore.allowance)){
       totalNumberOftx = Number(this.totalNumberTx) + 1;
     } else {
@@ -73,14 +73,14 @@ export class FourthStep extends React.Component {
           <h1 className="title"><strong>Welcome to Token</strong> MultiSender</h1>
           <p className="description">
             Please provide Token Address, JSON file with addresses <br />
-            This Dapp supports Mainnet, POA-Core, POA-sokol, Ropsten, Rinkeby, Kovan
+            This Dapp supports NewChain Mainnet and NewChain Testnet
           </p>
           <form className="form">
             <p>{status}</p>
             <div className="table">
               {txHashes}
             </div>
-            {/* <Link className="button button_next" to='/5'>Back to Home</Link> */}
+            {<Link className="button button_next" to='/'>Back to Home</Link>}
           </form>
         </div>
       </div>

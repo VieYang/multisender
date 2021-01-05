@@ -43,8 +43,8 @@ export class ThirdStep extends React.Component {
     if( new BN(this.tokenStore.totalCostInEth).gt(new BN(this.tokenStore.ethBalance))){
       console.error('please fund you account in ')
       swal({
-        title: "Insufficient ETH balance",
-        text: `You don't have enough ETH to send to all addresses. Amount needed: ${this.tokenStore.totalCostInEth} ETH`,
+        title: "Insufficient NEW balance",
+        text: `You don't have enough NEW to send to all addresses. Amount needed: ${this.tokenStore.totalCostInEth} NEW`,
         icon: "error",
       })
       return
@@ -64,7 +64,7 @@ export class ThirdStep extends React.Component {
           <h1 className="title"><strong>Welcome to Token</strong> MultiSender</h1>
           <p className="description">
           Please provide Token Address, JSON file with addresses <br />
-          This Dapp supports Mainnet, POA-Core, POA-sokol, Ropsten, Rinkeby, Kovan
+          This Dapp supports NewChain Mainnet and NewChain Testnet
           </p>
           <form className="form">
             <ReactJson displayDataTypes={false}
@@ -97,10 +97,10 @@ export class ThirdStep extends React.Component {
                 </div>
                 <div className="send-info-i">
                   <p>Your Contract's Current fee Per tx</p>
-                  <p className="send-info-amount">{this.tokenStore.currentFee} ETH</p>
+                  <p className="send-info-amount">{this.tokenStore.currentFee} NEW</p>
                 </div>
                 <div className="send-info-i">
-                  <p>Your ETH Balance</p>
+                  <p>Your NEW Balance</p>
                   <p className="send-info-amount">{new BN(this.tokenStore.ethBalance).toFormat(3)}</p>
                 </div>
               </div>
@@ -120,7 +120,7 @@ export class ThirdStep extends React.Component {
                 <div className="send-info-i">
                   <p>Approximate Cost of Operation</p>
                   <p className="send-info-amount">
-                  {this.tokenStore.totalCostInEth} ETH
+                  {this.tokenStore.totalCostInEth} NEW
                   </p>
                 </div>
                 <div className="send-info-i">

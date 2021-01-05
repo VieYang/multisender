@@ -45,7 +45,7 @@ class Web3Store {
       })
       tokens.unshift({
         value: '0x000000000000000000000000000000000000bEEF',
-        label: "ETH - Ethereum Native Currency"
+        label: "NEW - NewChain Native Currency"
       })
       this.userTokens = tokens;
       this.loading = false;
