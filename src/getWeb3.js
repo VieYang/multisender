@@ -8,6 +8,12 @@ let getWeb3 = () => {
 
       // Checking if Web3 has been injected by the browser (Mist/MetaMask)
       if (typeof web3 !== 'undefined') {
+        // TODO: update this
+        var ethEnable = window.ethereum.enable() || null;
+        if(ethEnable === null){
+          reject({message: 'Please unlock your metamask, choose account and refresh the page'})
+        }
+
         // Use Mist/MetaMask's provider.
         web3 = new window.Web3(web3.currentProvider)
         web3.version.getNetwork((err, netId) => {
