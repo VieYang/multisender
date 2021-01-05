@@ -18,7 +18,7 @@ jobs:
           node-version: 9.7.1
 
       - name: Build
-        run: npm install && npm run build
+        run: cp .env.example .env && npm install && npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
